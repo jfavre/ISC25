@@ -40,6 +40,11 @@ struct tipsySph {
 std::vector<tipsySph> scalarsAOS;
 int NbofScalarfields = sizeof(tipsySph)/sizeof(float);
 ```
+<br>
+<br>
+N.B. PKDGRAV3 uses AOS
+
+
 </div>
 
 <div> <!-- #right -->
@@ -55,6 +60,11 @@ Structure-of-Arrays (SOA)
     std::vector<float> phi;
 }
 ```
+<br>
+<br>
+<br>
+N.B. SPH-EXA uses SOA
+
 </div>
 </div>
 
@@ -215,9 +225,9 @@ table {
 </style>
 | <strong>PKDGRAV3</strong> | <strong>VTK-m</strong> | <strong>Ascent</strong> | <strong>ParaView Catalyst</strong> |
 | -------- | :-------: | :--------: | :-------: |
-| in-situ rendering | ✅ yes | ❌ failing, although Data saving works | stride is not correct|
-| Geometric clipping | ✅ yes | ✅ yes | idem as above |
-| composing vectors | ✅ yes | ❌ "composite_vector" failing | idem as above |
+| in-situ rendering | ✅ yes | ❌ failing, although Data saving works | ❌ stride is not correct|
+| Geometric clipping | ✅ yes | ✅ yes | ❌ idem as above |
+| composing vectors | ✅ yes | ❌ "composite_vector" failing | ❌ idem as above |
 | Data binning | ⛔️ n.a. | float64 ✅ OK <br> float32 ❌ not OK | ⛔️ n.a. |
 | Histogram sampling | ✅ yes | ❌ failing | ⛔️ n.a. |
 
@@ -296,11 +306,13 @@ to it</span>, not by the thread that allocates it.
 <div class="grid grid-cols-[55%_45%]">
 <div> <!-- #left -->
 - allocate memory on the host <br>
-- first touch on the GPU-side <br>
-- no need to copy from GPU to host when we trigger the in-situ visualizations
+<v-click> - first touch on the GPU-side <br></v-click>
+<v-click> - no need to copy from GPU to host when we trigger the<br>
+            in-situ visualizations</v-click>
 <br>
 <br>
-- we instrumented a CUDA simulator for the 2D heat diffusion equation
+<v-click> - we instrumented a CUDA simulator for the 2D<br>
+            heat diffusion equation</v-click>
 </div>
 
 <div> <!-- #right -->
